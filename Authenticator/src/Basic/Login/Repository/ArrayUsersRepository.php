@@ -2,11 +2,11 @@
 
 namespace Basic\Login\Repository;
 
-use Basic\Login\Entity\User;
+use Basic\Login\Entities\Users;
 use PHPFluent\ArrayStorage\Record;
 use PHPFluent\ArrayStorage\Storage;
 
-class ArrayUserRepository implements UserRepository
+class ArrayUsersRepository implements UsersRepository
 {
     private $users;
 
@@ -15,18 +15,17 @@ class ArrayUserRepository implements UserRepository
         $this->users = $storage->users;
     }
 
-    public function findByUsername($username)
+    public function findByUsersname($username)
     {
         $record = $this->users->find(array('username' => $username));
 
         if (!$record instanceof Record) {
+            die;
             return false;
         }
 
-        $user = new User();
-        $user->setId($record->id);
-        $user->setUsername($record->username);
-        $user->setPassword($record->password);
+        $user = new Users($record->username, $record->password);
+        $user->id = $record->id;
 
         return $user;
     }

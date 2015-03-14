@@ -3,13 +3,13 @@
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use Pimple\Container;
-use Basic\Login\Repository\ArrayUserRepository;
+use Basic\Login\Repository\ArrayUsersRepository;
 use Basic\Login\Authenticator;
 use PHPFluent\ArrayStorage\Storage;
-use Basic\Login\Repository\PDOUserRepository;
+use Basic\Login\Repository\PDOUsersRepository;
 use Respect\Relational\Mapper;
-use Basic\Login\Repository\RespectUserRepository;
-use Basic\Login\Repository\CSVUserRepository;
+use Basic\Login\Repository\RespectUsersRepository;
+use Basic\Login\Repository\CSVUsersRepository;
 use League\Csv\Reader;
 
 $container = new Container();
@@ -53,19 +53,19 @@ $container["csv_storage"] = function($c) {
 };
 
 $container["array_user_repository"] = function ($c) {
-    return new ArrayUserRepository($c["array_storage"]);
+    return new ArrayUsersRepository($c["array_storage"]);
 };
 
 $container["pdo_user_repository"] = function ($c) {
-    return new PDOUserRepository($c["sqlite_storage"]);
+    return new PDOUsersRepository($c["sqlite_storage"]);
 };
 
 $container["respect_user_repository"] = function ($c) {
-    return new RespectUserRepository(new Mapper($c["sqlite_storage"]));
+    return new RespectUsersRepository(new Mapper($c["sqlite_storage"]));
 };
 
 $container["csv_user_repository"] = function ($c) {
-    return new CSVUserRepository($c["csv_storage"]);
+    return new CSVUsersRepository($c["csv_storage"]);
 };
 
 $container["authenticator"] = function ($c) {

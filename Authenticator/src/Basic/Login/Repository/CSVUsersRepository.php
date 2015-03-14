@@ -2,9 +2,9 @@
 
 namespace Basic\Login\Repository;
 
-use Basic\Login\Entity\User;
+use Basic\Login\Entities\Users;
 
-class CSVUserRepository implements UserRepository
+class CSVUsersRepository implements UsersRepository
 {
     private $csv;
 
@@ -13,7 +13,7 @@ class CSVUserRepository implements UserRepository
         $this->csv = $csv;
     }
 
-    public function findByUsername($username)
+    public function findByUsersname($username)
     {
         $record = $this->csv
             ->addFilter(function ($row, $index) {
@@ -30,10 +30,8 @@ class CSVUserRepository implements UserRepository
             return false;
         }
 
-        $user = new User();
-        $user->setId($record[0]);
-        $user->setUsername($record[1]);
-        $user->setPassword($record[2]);
+        $user = new Users($record[1], $record[2]);
+        $user->id = $record[0];
 
         return $user;
     }

@@ -14,12 +14,12 @@ php app/pdo_authenticator.php
 It should show something like this:
 
 ```
-object(Basic\Login\Entity\User)#21 (3) {
-  ["id":"Basic\Login\Entity\User":private]=>
+object(Basic\Login\Entities\Users)#21 (3) {
+  ["id":"Basic\Login\Entities\Users":private]=>
   int(1)
-  ["username":"Basic\Login\Entity\User":private]=>
+  ["username":"Basic\Login\Entities\Users":private]=>
   string(8) "john.doe"
-  ["password":"Basic\Login\Entity\User":private]=>
+  ["password":"Basic\Login\Entities\Users":private]=>
   string(60) "$2y$10$R8E3yIfyjBrTXwq/c8F54e..sUHIx2THoZhvEg45ddC58eA2LnE46"
 }
 ```
